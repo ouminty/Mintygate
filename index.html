@@ -108,21 +108,22 @@
 <script>
 /* Access code check */
 function checkCode() {
-  const input = document.getElementById('code').value.toLowerCase(); // case-insensitive
+  const input = document.getElementById('code').value.toLowerCase();
 
   if(input === "garbo") {
-    window.location.href = "https://mintyportal.company.site";
+    window.open("https://mintyportal.company.site", "_blank");
   } 
   else if(input === "yt") {
-    window.location.href = "https://www.youtube.com";
+    window.open("https://www.youtube.com", "_blank");
   } 
   else if(input === "fox") {
-    window.location.href = "https://discord.com/invite/8bRMGXXqXs";
+    window.open("https://discord.com/invite/8bRMGXXqXs", "_blank");
   } 
   else {
     document.getElementById('msg').textContent = "❌ Wrong code, try again!";
   }
 }
+
 
 /* Particle effect */
 const canvas = document.getElementById('particles');
@@ -182,6 +183,7 @@ animate();
 
 </body>
 </html>
+
 
 
 
