@@ -108,11 +108,18 @@
 <script>
 /* Access code check */
 function checkCode() {
-  const input = document.getElementById('code').value;
+  const input = document.getElementById('code').value.toLowerCase(); // case-insensitive
+
   if(input === "garbo") {
-    // Redirect to your store
     window.location.href = "https://mintyportal.company.site";
-  } else {
+  } 
+  else if(input === "yt") {
+    window.location.href = "https://www.youtube.com";
+  } 
+  else if(input === "fox") {
+    window.location.href = "https://discord.com/invite/8bRMGXXqXs";
+  } 
+  else {
     document.getElementById('msg').textContent = "❌ Wrong code, try again!";
   }
 }
@@ -175,5 +182,6 @@ animate();
 
 </body>
 </html>
+
 
 
