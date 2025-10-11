@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Access</title>
+<style>
+  body { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    font-family: Arial, sans-serif; 
+    background-color: #f4f4f4;
+  }
+  #container { 
+    text-align: center; 
+    padding: 40px; 
+    border-radius: 10px; 
+    background: white; 
+    box-shadow: 0 0 15px rgba(0,0,0,0.2); 
+  }
+  input { padding: 12px; font-size: 16px; margin-top: 15px; width: 200px; }
+  button { padding: 12px 25px; font-size: 16px; margin-top: 15px; cursor: pointer; }
+  #msg { color: red; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <h2>Enter Access Code</h2>
+  <input type="password" id="code" placeholder="Enter code">
+  <br>
+  <button onclick="checkCode()">Enter</button>
+  <p id="msg"></p>
+</div>
+
+<script>
+function checkCode() {
+  const input = document.getElementById('code').value;
+  if(input === "1122") {
+    window.location.href = "https://mintyportal.company.site"; // change to your site
+  } else {
+    document.getElementById('msg').textContent = "❌ Wrong code, try again!";
+  }
+}
+</script>
+
+</body>
+</html>
