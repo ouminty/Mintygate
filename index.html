@@ -92,16 +92,6 @@
     margin-top: 12px;
     font-weight: 500;
   }
-
-  /* Embedded Ecwid store iframe */
-  #store {
-    display: none;
-    width: 100%;
-    height: 80vh;
-    border: none;
-    margin-top: 20px;
-    border-radius: 12px;
-  }
 </style>
 </head>
 <body>
@@ -113,20 +103,15 @@
   <input type="password" id="code" placeholder="Enter code">
   <button onclick="checkCode()">Enter</button>
   <p id="msg"></p>
-  <iframe id="store" src="https://mintyportal.company.site"></iframe>
 </div>
 
 <script>
 /* Access code check */
 function checkCode() {
   const input = document.getElementById('code').value;
-  const store = document.getElementById('store');
   if(input === "1122") {
-    document.getElementById('code').style.display = 'none';
-    document.querySelector('button').style.display = 'none';
-    document.getElementById('msg').style.display = 'none';
-    document.querySelector('h2').textContent = "Welcome!";
-    store.style.display = 'block';
+    // Redirect to your store
+    window.location.href = "https://mintyportal.company.site";
   } else {
     document.getElementById('msg').textContent = "❌ Wrong code, try again!";
   }
@@ -171,19 +156,23 @@ function initParticles(){
     particlesArray.push(new Particle());
   }
 }
+
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   particlesArray.forEach(p => { p.update(); p.draw(); });
   requestAnimationFrame(animate);
 }
+
 window.addEventListener('resize', ()=>{
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   initParticles();
 });
+
 initParticles();
 animate();
 </script>
 
 </body>
 </html>
+
