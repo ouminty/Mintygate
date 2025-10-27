@@ -38,7 +38,7 @@
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 40px;
+    padding: 30px;
     border-radius: 15px;
     background: rgba(0,0,0,0.85);
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
@@ -53,7 +53,7 @@
     letter-spacing: 1px;
   }
 
-  input, textarea {
+  input {
     padding: 12px;
     font-size: 16px;
     margin-top: 10px;
@@ -64,9 +64,10 @@
     background: rgba(255,255,255,0.1);
     color: white;
     backdrop-filter: blur(5px);
+    box-sizing: border-box;
   }
 
-  input::placeholder, textarea::placeholder {
+  input::placeholder {
     color: rgba(255,255,255,0.6);
   }
 
@@ -93,33 +94,6 @@
     margin-top: 12px;
     font-weight: 500;
   }
-
-  #chatBox {
-    margin-top: 20px;
-    text-align: left;
-    max-height: 300px;
-    overflow-y: auto;
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 10px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.05);
-  }
-
-  .chatMessage {
-    margin-bottom: 10px;
-    line-height: 1.4;
-  }
-
-  .chatMessage.user {
-    text-align: right;
-    color: #a0e0ff;
-  }
-
-  .chatMessage.bot {
-    text-align: left;
-    color: #f5f5a0;
-  }
-
 </style>
 </head>
 <body>
@@ -128,17 +102,9 @@
 
 <div id="container">
   <h2>Enter Access Code</h2>
-  <input type="text" id="code" placeholder="Enter code">
+  <input type="password" id="code" placeholder="Enter code">
   <button onclick="checkCode()">Enter</button>
   <p id="msg"></p>
-
-  <!-- Chat interface -->
-  <div id="chatInterface" style="display:none;">
-    <h2>MintyGate Chat</h2>
-    <div id="chatBox"></div>
-    <textarea id="chatInput" placeholder="Type your message..." rows="2"></textarea>
-    <button onclick="sendMessage()">Send</button>
-  </div>
 </div>
 
 <script>
@@ -158,49 +124,10 @@ function checkCode() {
   } 
   else if(input === "teeza") {
     window.open("https://dashboard.botghost.com/dashboard/modules", "_blank");
-  }
-  else if(input === "chatgpt") {
-    msg.textContent = "💬 Access granted! Chat panel unlocked.";
-    document.getElementById('chatInterface').style.display = 'block';
-    document.getElementById('code').style.display = 'none';
-  }
+  } 
   else {
     msg.textContent = "❌ Wrong code, try again!";
   }
-}
-
-/* ChatGPT integration */
-function appendMessage(sender, text) {
-  const chatBox = document.getElementById('chatBox');
-  const div = document.createElement('div');
-  div.className = 'chatMessage ' + sender;
-  div.textContent = text;
-  chatBox.appendChild(div);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function sendMessage() {
-  const inputEl = document.getElementById('chatInput');
-  const message = inputEl.value.trim();
-  if(!message) return;
-  appendMessage('user', message);
-  inputEl.value = '';
-
-  // Send message to MintyGate ChatGPT backend
-  fetch("https://chatgpt-backend-65am.onrender.com/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: message })
-  })
-  .then(res => res.json())
-  .then(data => {
-    const reply = data.reply || JSON.stringify(data);
-    appendMessage('bot', reply);
-  })
-  .catch(err => {
-    console.error(err);
-    appendMessage('bot', "❌ Failed to connect to ChatGPT.");
-  });
 }
 
 /* Particle effect */
